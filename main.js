@@ -138,7 +138,7 @@ const generator = async (prompts, validationRegExes, about, dir, cmd, mergeScrip
 
         // @Build.js
         removeDefault('Build') // Removes the default error message
-        mergeScript('Build', `exit(await spawn('./node_modules/.bin/tsc', []))`)
+        mergeScript('Build', `exit(await spawn(modules.path.join(process.cwd(), 'node_modules/.bin/tsc'), []))`)
 
         // @Prep.js
         mergeScript('Prep', `await cmd(modules.path.join(process.cwd(), 'node_modules/.bin/tsc')).catch(error)`)

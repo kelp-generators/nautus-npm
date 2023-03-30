@@ -1,5 +1,5 @@
 // This will automoatically publish your code to npm
-await spawn('./node_modules/.bin/tsc')
+await spawn(modules.path.join(process.cwd(), 'node_modules/.bin/tsc'), [])
 const { path, fs } = modules
 const file = JSON.parse(fs.readFileSync(path.join(process.cwd(), 'package.json')))
 const { version } = file
