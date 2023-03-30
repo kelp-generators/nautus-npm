@@ -52,6 +52,7 @@ const generator = async (prompts, validationRegExes, about, dir, cmd, mergeScrip
     const { prompt, confirm, numeral, toggle, select, multiSelect } = prompts
 
     // Do your prompts here
+    console.log(chalk.green('Hello, this is a generator which is still in development!'))
 
     // Do your generation here
 }
@@ -66,5 +67,5 @@ module.exports = {
             in this project to add command support.
         */
     },
-    gitIgnore: `# If you want to merge something into the .gitignore, add it here`
+    gitIgnore: ``
 }
