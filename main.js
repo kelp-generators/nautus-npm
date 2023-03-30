@@ -122,7 +122,7 @@ const generator = async (prompts, validationRegExes, about, dir, cmd, mergeScrip
 
     // Configuring TypeScript
     if (tsUsage) {
-        await cmd('npm i typescript -D')
+        await cmd('npm i typescript @types/node -D')
         fs.writeFileSync(path.join(dir, 'tsconfig.json'), JSON.stringify({
             compilerOptions: {
                 target: tsTarget,
@@ -141,11 +141,11 @@ const generator = async (prompts, validationRegExes, about, dir, cmd, mergeScrip
         mergeScript('Build', `exit(await spawn('./node_modules/.bin/tsc', []))`)
 
         // @Prep.js
-        mergeScript('Prep', `await cmd('./node_modules/.bin/tsc')`)
+        mergeScript('Prep', `await cmd(modules.path.join(process.cwd(), 'node_modules/.bin/tsc')).catch(error)`)
 
         // @Run.js
         removeDefault('Run') // Removes the default error message
-        mergeScript('Run', `exit(await spawn('node', ["${main}"]))`)
+        mergeScript('Run', `exit(await spawn('node', ["dist/${main}"]))`)
 
         // @Release.js
         removeDefault('Release')
