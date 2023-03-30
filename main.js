@@ -122,7 +122,7 @@ const generator = async (prompts, validationRegExes, about, dir, cmd, mergeScrip
 
     // Configuring TypeScript
     if (tsUsage) {
-        await exec('npm i typescript -D')
+        await cmd('npm i typescript -D')
         fs.writeFileSync(path.join(dir, 'tsconfig.json'), JSON.parse({
             compilerOptions: {
                 target: tsTarget,
