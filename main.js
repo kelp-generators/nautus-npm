@@ -80,7 +80,10 @@ const generator = async (prompts, validationRegExes, about, dir, cmd, mergeScrip
         tsTarget = await prompt('Target', 'es5', /^(es|ES)(([0-9]|NEXT)*)$/)
     }
 
-    const main = await toggle('Entry point', 'index.js', 'main.js')
+    let main = 'index.js'
+    if (!tsUsage) {
+        main = await toggle('Entry point', 'main.js', 'index.js')
+    }
 
     const license = await prompt('License', 'MIT', validationRegExes.license)
 
