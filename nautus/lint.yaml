@@ -1,0 +1,6 @@
+# Here you can specify linting commands for specific tanks
+# If you haven't created any yet, use the main tank
+tanks:
+  main:
+    lintingCommand: echo "No linting command specified! Please edit nautus/lint.yaml"
+    fixCommand: echo "No fix command specified! Please edit nautus/lint.yaml"
