@@ -67,7 +67,7 @@ const generator = async (prompts, validationRegExes, about, dir, cmd, mergeScrip
                 return false
             }
         } catch {
-            return false
+            return true
         }
     })
     const description = await prompt('Description', '', null, true)
@@ -144,6 +144,10 @@ const generator = async (prompts, validationRegExes, about, dir, cmd, mergeScrip
         removeDefault('Run') // Removes the default error message
         mergeScript('Run', `exit(await spawn('node', ["${main}"]))`)
 
+        // @Release.js
+        removeDefault('Release')
+        mergeScript('Release', fs.readFileSync(path.join(__dirname, 'templates', '@Releasets.js')))
+
         fs.appendFileSync(path.join(dir, '.npmignore'), 'lib/\n.dccache\nnautus\n')
     } else {
         // Create entry file
@@ -154,13 +158,13 @@ const generator = async (prompts, validationRegExes, about, dir, cmd, mergeScrip
         mergeScript('Run', `exit(await spawn('node', ["${main}"]))`)
 
         fs.appendFileSync(path.join(dir, '.npmignore'), '.dccache\nnautus\n')
+
+        // @Release.js
+        removeDefault('Release')
+        mergeScript('Release', fs.readFileSync(path.join(__dirname, 'templates', '@Release.js')))
     }
 
     fs.ensureFileSync(path.join(dir, 'README.md'))
-
-    // @Release.js
-    removeDefault('Release')
-    mergeScript('Release', fs.readFileSync(path.join(__dirname, 'templates', '@Release.js')))
 
     // INFO
     console.log(chalk.green(`Successfully generated npm module. You can run it by using ${chalk.cyan('nautus run')}. To publish it to npm use ${chalk.cyan('nautus release major|minor|patch')}`))
