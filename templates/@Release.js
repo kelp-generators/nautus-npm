@@ -17,5 +17,5 @@ if (releasetype === 'major') {
 }
 const newVersion = versionArray.join('.')
 file.version = newVersion
-fs.writeFileSync(path.join(process.cwd(), 'package.json'), JSON.stringify(file))
+fs.writeFileSync(path.join(process.cwd(), 'package.json'), JSON.stringify(file, null, 4))
 await spawn('npm', ['publish'])

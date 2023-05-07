@@ -118,7 +118,7 @@ const generator = async (prompts, validationRegExes, about, dir, cmd, mergeScrip
         pkgJSON.homepage = `https://github.com/${repo}#readme`
     }
     if (tsUsage) pkgJSON.types = 'dist/index.d.ts'
-    fs.writeFileSync(path.join(dir, 'package.json'), JSON.stringify(pkgJSON))
+    fs.writeFileSync(path.join(dir, 'package.json'), JSON.stringify(pkgJSON, null, 4))
 
     // Configuring TypeScript
     if (tsUsage) {
@@ -131,7 +131,7 @@ const generator = async (prompts, validationRegExes, about, dir, cmd, mergeScrip
                 outDir: './dist',
                 strict: true
             }
-        }))
+        }, null, 4))
 
         fs.ensureDirSync(path.join(dir, 'lib'))
         fs.ensureFileSync(path.join(dir, 'lib', 'index.ts'))
@@ -290,7 +290,7 @@ const use = async (prompts, validationRegExes, about, dir, cmd, mergeScript, rem
         pkgJSON.homepage = `https://github.com/${repo}#readme`
     }
     if (tsUsage) pkgJSON.types = 'dist/index.d.ts'
-    fs.writeFileSync(path.join(dir, 'package.json'), JSON.stringify(pkgJSON))
+    fs.writeFileSync(path.join(dir, 'package.json'), JSON.stringify(pkgJSON, null, 4))
 
     // Configuring TypeScript
     if (tsUsage) {
@@ -303,7 +303,7 @@ const use = async (prompts, validationRegExes, about, dir, cmd, mergeScript, rem
                 outDir: './dist',
                 strict: true
             }
-        }))
+        }, null, 4))
 
         fs.ensureFileSync(path.join(dir, main))
 
