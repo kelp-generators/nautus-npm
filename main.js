@@ -251,8 +251,10 @@ const use = async (prompts, validationRegExes, about, dir, cmd, mergeScript, rem
 
     const tsUsage = await confirm('Do you want to use TypeScript')
     let tsTarget
+    let tsModuleTarget
     if (tsUsage) {
-        tsTarget = await prompt('Target', 'es5', /^(es|ES)(([0-9]|NEXT)*)$/)
+        tsTarget = await prompt('Target', 'es5', /^(es|ES)(([0-9]|NEXT|Next)*)$/)
+        tsModuleTarget = await toggle('Module target', 'commonjs', 'EsNext')
     }
 
     let main = await prompt('Path to entry point', 'index.js')
@@ -298,7 +300,7 @@ const use = async (prompts, validationRegExes, about, dir, cmd, mergeScript, rem
         fs.writeFileSync(path.join(dir, 'tsconfig.json'), JSON.stringify({
             compilerOptions: {
                 target: tsTarget,
-                module: 'commonjs',
+                module: tsModuleTarget,
                 declaration: true,
                 outDir: './dist',
                 strict: true
