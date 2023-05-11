@@ -300,7 +300,7 @@ const use = async (prompts, validationRegExes, about, dir, cmd, mergeScript, rem
         fs.writeFileSync(path.join(dir, 'tsconfig.json'), JSON.stringify({
             compilerOptions: {
                 target: tsTarget,
-                module: tsModuleTarget,
+                module: tsModuleTarget, // ❇️
                 declaration: true,
                 outDir: './dist',
                 strict: true
